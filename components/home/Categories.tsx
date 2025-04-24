@@ -25,7 +25,7 @@ const Categories = () => {
   ];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-5 w-full">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full">
       {categories.map((category, i) => {
         return (
           <div
@@ -35,7 +35,7 @@ const Categories = () => {
             <Image
               src={category.image}
               alt={`category-${i}`}
-              className="w-32 h-32 bg-primary/20 p-5 rounded-full "
+              className="w-32 h-32 bg-primary/20 p-5 rounded-full border-2 border-dashed border-primary "
             />
             <h6 className="text-lg font-bold"> {category.name}</h6>
           </div>

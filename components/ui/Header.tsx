@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useCallback } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Container from "./Container";
 import mainLogo from "@/public/janebi-logo.svg";
@@ -8,10 +8,22 @@ import NavMenu from "./NavMenu";
 import { Button } from "./button";
 import { ShoppingBasket, User } from "lucide-react";
 import MenuDrawer from "./MenuDrawer";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Header: React.FC = () => {
   const { scrollY } = useScroll();
   const headerColor = useTransform(scrollY, [0, 300], ["#0000", "#fff"]);
+
+  const router = useRouter();
+
+  const routerHandler = useCallback(
+    (path: string) => {
+      router.push(path);
+    },
+    [router]
+  );
+
   return (
     <>
       <motion.header
@@ -22,20 +34,25 @@ const Header: React.FC = () => {
           <div className="flex h-full items-center justify-between w-full">
             <div className="flex items-center justify-start gap-5">
               <MenuDrawer />
-              <Image
-                src={mainLogo}
-                alt="mainLogo"
-                priority
-                className="max-w-32"
-              />
+              <Link href={"/"}>
+                <Image
+                  src={mainLogo}
+                  alt="mainLogo"
+                  priority
+                  className="max-w-32"
+                />
+              </Link>
             </div>
             <NavMenu />
             <div className="flex items-center justify-center gap-2">
-              <Button variant={"outline"}>
+              <Button
+                onClick={() => routerHandler("/cart")}
+                variant={"outline"}
+              >
                 <span className="md:block hidden">سبد خرید</span>
                 <ShoppingBasket size={20} />
               </Button>
-              <Button>
+              <Button onClick={() => routerHandler("/auth")}>
                 <span className="md:block hidden">ورود/ثبت‌نام</span>
                 <User size={20} />
               </Button>

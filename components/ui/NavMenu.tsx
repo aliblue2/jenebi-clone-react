@@ -22,9 +22,9 @@ import { NavigationMenuLink } from "./navigation-menu";
 
 const NavMenu = () => {
   return (
-    <div className="w-8/12  md:flex hidden h-full  items-center ">
+    <div className="w-8/12  md:flex hidden h-full items-center ">
       <NavigationMenu>
-        <NavigationMenuList className="flex items-center justify-start gap-8 h-full">
+        <NavigationMenuList className="flex items-center justify-start gap-5 h-full">
           <NavigationMenuItem className="cursor-pointer">
             <NavigationMenuTrigger>
               <span className="flex items-center justify-start gap-2">

@@ -9,14 +9,14 @@ const BannerSlider = () => {
   const banners = [BannerOne, BannerTwo, BannerThree];
 
   return (
-    <Carousel dir="ltr" className="w-full h-96 py-5">
+    <Carousel dir="ltr" className="w-full md:h-96 h-56 py-5">
       <CarouselContent>
         {banners.map((bannerSrc, index) => (
           <CarouselItem key={index}>
             <Image
               src={bannerSrc}
               alt={`banner-${index}`}
-              className="w-full h-96 object-cover object-right-top rounded-3xl shadow-lg"
+              className="w-full md:h-96 h-56 object-cover object-right rounded-3xl shadow-lg"
             />
           </CarouselItem>
         ))}
