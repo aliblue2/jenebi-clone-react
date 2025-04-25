@@ -14,11 +14,13 @@ import {
   Percent,
   Rss,
   Smartphone,
+  Store,
   Users,
   Watch,
 } from "lucide-react";
 import React from "react";
 import { NavigationMenuLink } from "./navigation-menu";
+import Link from "next/link";
 
 const NavMenu = () => {
   return (
@@ -27,7 +29,7 @@ const NavMenu = () => {
         <NavigationMenuList className="flex items-center justify-start gap-5 h-full">
           <NavigationMenuItem className="cursor-pointer">
             <NavigationMenuTrigger>
-              <span className="flex items-center justify-start gap-2">
+              <span className="flex items-center justify-start gap-2 text-sm">
                 دسته‌بندی محصولات
                 <ChevronDown size={20} />
               </span>
@@ -59,26 +61,32 @@ const NavMenu = () => {
               </NavigationMenuLink>
             </NavigationMenuContent>
           </NavigationMenuItem>
+          <Link href={"/products"} className="cursor-pointer">
+            <div className="flex items-center justify-start gap-2 text-sm">
+              فروشگاه
+              <Store size={20} />
+            </div>
+          </Link>
           <NavigationMenuItem className="cursor-pointer">
-            <div className="flex items-center justify-start gap-2">
+            <div className="flex items-center justify-start gap-2 text-sm">
               پیشنهاد ویژه
               <Percent size={20} />
             </div>
           </NavigationMenuItem>
           <NavigationMenuItem className="cursor-pointer">
-            <div className="flex items-center justify-start gap-2">
+            <div className="flex items-center justify-start gap-2 text-sm">
               پرفروش ترین‌ها
               <Flame size={20} />
             </div>
           </NavigationMenuItem>
           <NavigationMenuItem className="cursor-pointer">
-            <div className="flex items-center justify-start gap-2">
+            <div className="flex items-center justify-start gap-2 text-sm">
               وبلاگ
               <Rss size={20} />
             </div>
           </NavigationMenuItem>
           <NavigationMenuItem className="cursor-pointer">
-            <div className="flex items-center justify-start gap-2">
+            <div className="flex items-center justify-start gap-2 text-sm">
               درباره‌ما
               <Users size={20} />
             </div>

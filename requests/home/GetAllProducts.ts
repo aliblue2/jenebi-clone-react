@@ -17,13 +17,10 @@ export const GetAllProducts = async (categoryName?: string) => {
   return products;
 };
 
-export const GetProduct = async (productId: number) => {
-  const response = await fetch(
-    `${process.env.BASE_URL}products/${productId}}`,
-    {
-      cache: "no-store",
-    }
-  );
+export const GetProduct = async (productId: string) => {
+  const response = await fetch(`${process.env.BASE_URL}products/${productId}`, {
+    cache: "no-store",
+  });
 
   if (!response.ok) {
     throw new Error("cant get products lists");
