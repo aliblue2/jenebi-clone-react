@@ -15,6 +15,7 @@ import { Button } from "./button";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -37,6 +38,9 @@ const MenuDrawer = () => {
             <Menu size={24} />
           </Button>
         </SheetTrigger>
+        <SheetDescription>
+          <span className="hidden">this is menu drawer</span>
+        </SheetDescription>
         <SheetContent>
           <SheetHeader>
             <SheetTitle dir="ltr">

@@ -1,47 +1,44 @@
 "use client";
 
 import React from "react";
-import { Tabs } from "../ui/tabs";
-import { TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import { Card, CardContent } from "../ui/card";
 import { LogIn, UserPlus } from "lucide-react";
 import Login from "./Login";
 import Signup from "./Signup";
+import { useRouter, useSearchParams } from "next/navigation";
 const AuthContainer = () => {
+  const params = useSearchParams();
+  const router = useRouter();
+  const mode = params.get("mode") || "signup";
+
   return (
-    <div className="flex w-full h-screen items-start py-12 justify-center">
-      <Tabs defaultValue="login" className="w-[400px]">
-        <TabsList className="grid w-full grid-cols-2 bg-secondary p-2 rounded-xl divide-x-2 shadow-xs border">
-          <TabsTrigger
-            className="flex items-center justify-center gap-5"
-            value="login"
-          >
-            ورود
-            <LogIn size={20} />
-          </TabsTrigger>
-          <TabsTrigger
-            className="flex items-center justify-center gap-5"
-            value="signup"
-          >
-            ثبت‌نام
-            <UserPlus size={20} />
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value="login">
-          <Card>
-            <CardContent className="space-y-2">
-              <Login />
-            </CardContent>
-          </Card>
-        </TabsContent>
-        <TabsContent value="signup">
-          <Card>
-            <CardContent className="space-y-2">
-              <Signup />
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+    <div className="flex flex-col w-full h-screen items-center py-12 justify-start">
+      <div className="flex px-12 py-2 items-center justify-center gap-5">
+        <span
+          onClick={() => router.push("?mode=login")}
+          className={`${
+            mode === "login" && "text-primary font-medium text-lg"
+          } flex items-center justify-center gap-2 font-medium cursor-pointer `}
+        >
+          <LogIn size={20} />
+          ورود
+        </span>
+        <span
+          onClick={() => router.push("?mode=signup")}
+          className={`${
+            mode === "signup" && "text-primary font-medium text-lg"
+          } flex items-center justify-center gap-2 font-medium cursor-pointer `}
+        >
+          <UserPlus size={20} />
+          ثبت‌نام
+        </span>
+      </div>
+
+      <Card className="w-full max-w-[600px]">
+        <CardContent className="space-y-2">
+          {mode === "login" ? <Login /> : <Signup />}
+        </CardContent>
+      </Card>
     </div>
   );
 };

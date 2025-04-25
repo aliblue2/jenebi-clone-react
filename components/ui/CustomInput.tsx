@@ -5,6 +5,7 @@ interface inputProps {
   label: string;
   type: string;
   placeHolder: string;
+  requeredInpt?: boolean;
 }
 
 export type inputRef = HTMLInputElement;
@@ -19,6 +20,7 @@ const CustomInput = forwardRef<inputRef, inputProps>(function CustomInput(
         {props.label} :
       </label>
       <input
+        required={props.requeredInpt}
         className="w-full transition-colors duration-300 border rounded-xl font-medium p-2 outline-none focus:border-primary"
         type={props.type}
         name={props.name}

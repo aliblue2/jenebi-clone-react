@@ -10,6 +10,7 @@ import { ShoppingBasket, User } from "lucide-react";
 import MenuDrawer from "./MenuDrawer";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useUserStore } from "@/store/UserStore";
 
 const Header: React.FC = () => {
   const { scrollY } = useScroll();
@@ -23,6 +24,8 @@ const Header: React.FC = () => {
     },
     [router]
   );
+
+  const { accessToken } = useUserStore();
 
   return (
     <>
@@ -52,8 +55,18 @@ const Header: React.FC = () => {
                 <span className="md:block hidden">سبد خرید</span>
                 <ShoppingBasket size={20} />
               </Button>
-              <Button onClick={() => routerHandler("/auth")}>
-                <span className="md:block hidden">ورود/ثبت‌نام</span>
+              <Button
+                onClick={() => {
+                  if (accessToken) {
+                    router.push("/profile");
+                  } else {
+                    router.push("/auth");
+                  }
+                }}
+              >
+                <span className="md:block hidden">
+                  {accessToken ? "حساب کاربری" : "ورود/ثبت‌نام"}
+                </span>
                 <User size={20} />
               </Button>
             </div>
