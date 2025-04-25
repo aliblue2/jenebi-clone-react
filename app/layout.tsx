@@ -4,7 +4,7 @@ import Header from "@/components/ui/Header";
 import Container from "@/components/ui/Container";
 import { Toaster } from "react-hot-toast";
 import { GetUserToken } from "@/lib/tokens";
-import StoreInitializar from "@/components/ui/StoreInitializar";
+import Provider from "@/components/ui/Provider";
 
 export const metadata: Metadata = {
   title: "فروشگاه جانبی",
@@ -17,17 +17,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const { accessToken, refreshToken } = await GetUserToken();
-
   return (
     <html lang="fa" dir="rtl">
       <body suppressHydrationWarning={true}>
-        <StoreInitializar
-          accessToken={accessToken}
-          refreshToken={refreshToken}
-        />
         <Toaster position="top-center" />
-        <Header />
-        <Container>{children}</Container>
+        <Provider accessToken={accessToken} refreshToken={refreshToken}>
+          <Header />
+          <Container>{children}</Container>
+        </Provider>
       </body>
     </html>
   );
