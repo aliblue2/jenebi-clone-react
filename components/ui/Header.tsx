@@ -11,6 +11,7 @@ import MenuDrawer from "./MenuDrawer";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useUserStore } from "@/store/UserStore";
+import { useBasketStore } from "@/store/UserBasketStore";
 
 const Header: React.FC = () => {
   const { scrollY } = useScroll();
@@ -26,6 +27,7 @@ const Header: React.FC = () => {
   );
 
   const { accessToken } = useUserStore();
+  const { items } = useBasketStore();
 
   return (
     <>
@@ -34,7 +36,7 @@ const Header: React.FC = () => {
         className="h-16 w-full overflow-visible sticky top-0 z-30 "
       >
         <Container>
-          <div className="flex h-full items-center justify-between w-full">
+          <div className="flex h-full items-center justify-between gap-5 w-full">
             <div className="flex items-center justify-start gap-5">
               <MenuDrawer />
               <Link href={"/"}>
@@ -54,6 +56,9 @@ const Header: React.FC = () => {
               >
                 <span className="md:block hidden">سبد خرید</span>
                 <ShoppingBasket size={20} />
+                <span className="bg-primary w-5 rounded-full text-white">
+                  {items ? items.length : ""}
+                </span>
               </Button>
               <Button
                 onClick={() => {

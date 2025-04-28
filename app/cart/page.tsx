@@ -1,7 +1,10 @@
+import Landing from "@/components/cart/Landing";
 import React from "react";
 
 const page = () => {
-  return <div>this is cart page</div>;
+  return <>
+    <Landing />
+  </>;
 };
 
 export default page;

@@ -5,6 +5,8 @@ import Container from "@/components/ui/Container";
 import { Toaster } from "react-hot-toast";
 import { GetUserToken } from "@/lib/tokens";
 import Provider from "@/components/ui/Provider";
+import { GetUserBasket } from "@/requests/GetUserBasket";
+import { BasketItem } from "@/store/UserBasketStore";
 
 export const metadata: Metadata = {
   title: "فروشگاه جانبی",
@@ -17,11 +19,21 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const { accessToken, refreshToken } = await GetUserToken();
+  let orders: BasketItem[] = [];
+
+  if (accessToken) {
+    orders = await GetUserBasket(accessToken);
+  }
+
   return (
     <html lang="fa" dir="rtl">
-      <body suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true} className="bg-secondary">
         <Toaster position="top-center" />
-        <Provider accessToken={accessToken} refreshToken={refreshToken}>
+        <Provider
+          orders={orders}
+          accessToken={accessToken}
+          refreshToken={refreshToken}
+        >
           <Header />
           <Container>{children}</Container>
         </Provider>

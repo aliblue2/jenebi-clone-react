@@ -1,5 +1,5 @@
 import { GetAllProducts } from "@/requests/home/GetAllProducts";
-import { Laptop2, Smartphone, Watch, Gamepad2 } from "lucide-react";
+import { Laptop2, Smartphone, Watch, Gamepad2, CircleX } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -12,52 +12,85 @@ interface PageProps {
 const page = async ({ searchParams }: PageProps) => {
   const queryParams = await searchParams;
   const category = queryParams.category || "";
-
   const products = await GetAllProducts(category);
+
   return (
     <>
       <div className="flex items-center justify-start gap-5 mb-5">
         <span>دسته بندی ها :</span>
-        <Link
-          href={"/products?category=laptop"}
+        <div
           className={`${
-            category === "laptop" &&
-            "text-lg bg-secondary shadow-sm font-medium text-primary"
-          }   flex items-center justify-center gap-1 p-2 rounded-lg`}
+            category === "laptop" && "bg-primary text-white font-medium text-lg"
+          }   flex items-center justify-center gap-3 p-2 rounded-lg`}
         >
-          لپ‌تاپ ها
-          <Laptop2 size={20} />
-        </Link>
-        <Link
-          href={"/products?category=mobile"}
+          <Link
+            className="flex items-center justify-start gap-2"
+            href={"/products?category=laptop"}
+          >
+            <Laptop2 size={20} />
+            لپ‌تاپ ها
+          </Link>
+          {category === "laptop" && (
+            <Link href={"/products"}>
+              <CircleX size={18} />
+            </Link>
+          )}
+        </div>
+        <div
           className={`${
-            category === "mobile" &&
-            "text-lg bg-secondary shadow-sm font-medium text-primary"
-          }   flex items-center justify-center gap-1 p-2 rounded-lg`}
+            category === "mobile" && "bg-primary text-white font-medium text-lg"
+          }   flex items-center justify-center gap-3 p-2 rounded-lg`}
         >
-          موبایل ها
-          <Smartphone size={20} />
-        </Link>
-        <Link
-          href={"/products?category=smart-watch"}
+          <Link
+            className="flex items-center justify-start gap-2"
+            href={"/products?category=mobile"}
+          >
+            <Smartphone size={20} />
+            موبایل ها
+          </Link>
+          {category === "mobile" && (
+            <Link href={"/products"}>
+              <CircleX size={18} />
+            </Link>
+          )}
+        </div>
+        <div
           className={`${
             category === "smart-watch" &&
-            "text-lg bg-secondary shadow-sm font-medium text-primary"
-          }   flex items-center justify-center gap-1 p-2 rounded-lg`}
+            "bg-primary text-white font-medium text-lg"
+          }   flex items-center justify-center gap-3 p-2 rounded-lg`}
         >
-          ساعت هوشمند
-          <Watch size={20} />
-        </Link>
-        <Link
-          href={"/products?category=consol"}
+          <Link
+            className="flex items-center justify-start gap-2"
+            href={"/products?category=smart-watch"}
+          >
+            <Watch size={20} />
+            ساعت هوشمند
+          </Link>
+          {category === "smart-watch" && (
+            <Link href={"/products"}>
+              <CircleX size={18} />
+            </Link>
+          )}
+        </div>
+        <div
           className={`${
-            category === "consol" &&
-            "text-lg bg-secondary shadow-sm font-medium text-primary"
-          }   flex items-center justify-center gap-1 p-2 rounded-lg`}
+            category === "consol" && "bg-primary text-white font-medium text-lg"
+          }   flex items-center justify-center gap-3 p-2 rounded-lg`}
         >
-          کنسول‌بازی
-          <Gamepad2 size={20} />
-        </Link>
+          <Link
+            className="flex items-center justify-start gap-2"
+            href={"/products?category=consol"}
+          >
+            <Gamepad2 size={20} />
+            کنسول بازی
+          </Link>
+          {category === "consol" && (
+            <Link href={"/products"}>
+              <CircleX size={18} />
+            </Link>
+          )}
+        </div>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
         {products.map((product) => {
